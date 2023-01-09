@@ -1,11 +1,12 @@
+local M = {}
 local lib = require("nvim-tree.lib")
 local view = require("nvim-tree.view")
 
-local function collapse_all()
+M.collapse_all = function()
 	require("nvim-tree.actions.tree-modifiers.collapse-all").fn()
 end
 
-local function edit_or_open()
+M.edit_or_open = function()
 	-- open as vsplit on current node
 	local action = "edit"
 	local node = lib.get_node_at_cursor()
@@ -24,7 +25,7 @@ local function edit_or_open()
 	end
 end
 
-local function vsplit_preview()
+M.vsplit_preview = function()
 	-- open as vsplit on current node
 	local action = "vsplit"
 	local node = lib.get_node_at_cursor()
@@ -43,3 +44,21 @@ local function vsplit_preview()
 	-- Finally refocus on tree if it was lost
 	view.focus()
 end
+
+M.git_add = function()
+  local node = lib.get_node_at_cursor()
+  local gs = node.git_status
+
+  -- If the file is untracked, unstaged or partially staged, we stage it
+  if gs == "??" or gs == "MM" or gs == "AM" or gs == " M" then
+    vim.cmd("silent !git add " .. node.absolute_path)
+
+  -- If the file is staged, we unstage
+  elseif gs == "M " or gs == "A " then
+    vim.cmd("silent !git restore --staged " .. node.absolute_path)
+  end
+
+  lib.refresh_tree()
+end
+
+return M
