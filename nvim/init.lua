@@ -13,6 +13,7 @@ require 'user.ui.highlights.illuminate'
 
 require 'user.utils.todo-comments'
 require 'user.utils.pretty-folds'
+require 'user.utils.comments'
 
 require 'user.core.autocompletion'
 require 'user.core.lsp'

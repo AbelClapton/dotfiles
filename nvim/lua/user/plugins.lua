@@ -93,6 +93,9 @@ return packer.startup(function(use)
 	--> Toggle Bool
 	use { 'gerazov/vim-toggle-bool', requires = 'AndrewRadev/switch.vim' }
 
+	--> Toggle Comments
+	use { 'numToStr/Comment.nvim' }
+
 	--> Todo Comments
 	use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
 
