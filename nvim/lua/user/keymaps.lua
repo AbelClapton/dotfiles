@@ -7,6 +7,9 @@ local function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+--> Edit Neovim config
+map('n', '<leader>ve', '<cmd>vsplit ~/.config/nvim/init.lua<CR>')
+
 --> Better window navigation
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-l>', '<C-w>l')

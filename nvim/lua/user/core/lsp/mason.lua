@@ -3,6 +3,7 @@ if not mason_ok then return end
 
 mason.setup {
 	ui = {
+		check_outdated_packages_on_open = false,
 		border = 'rounded',
 		icons = {
 			package_installed = '◍',

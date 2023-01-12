@@ -30,6 +30,9 @@ packer.init({
 			return require('packer.util').float({ border = 'rounded' })
 		end,
 	},
+	git = {
+		clone_timeout = 1000,
+	}
 })
 
 return packer.startup(function(use)
@@ -38,6 +41,7 @@ return packer.startup(function(use)
 	--> Common
 	use { 'kyazdani42/nvim-web-devicons' }
 	use { 'nvim-lua/plenary.nvim' }
+	use { 'stevearc/dressing.nvim' }
 
 	--> UI
 	--> Colorscheme
@@ -62,6 +66,7 @@ return packer.startup(function(use)
 	--> Core
 	--> Telescope
 	use { 'nvim-telescope/telescope.nvim', tag = '0.1.0', requires = 'nvim-lua/plenary.nvim' }
+	use { 'nvim-telescope/telescope-project.nvim' }
 
 	--> Autopairs
 	use { 'windwp/nvim-autopairs' }
@@ -87,7 +92,17 @@ return packer.startup(function(use)
 	use { 'williamboman/mason.nvim' }
 	use { 'williamboman/mason-lspconfig.nvim' }
 	use { 'neovim/nvim-lspconfig' }
-	use { 'j-hui/fidget.nvim' } -- LSP Progress UI
+	use { 'j-hui/fidget.nvim' } --> LSP Progress UI
+
+	--> Linter
+	use { 'jose-elias-alvarez/null-ls.nvim' }
+	use { 'jayp0521/mason-null-ls.nvim' }
+
+	--> Git
+	use { 'lewis6991/gitsigns.nvim' }
+
+	--> Project Plugins
+	use { 'ahmedkhalf/project.nvim' }
 
 	--> Utils
 	--> Toggle Bool
