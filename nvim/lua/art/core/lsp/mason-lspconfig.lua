@@ -15,11 +15,11 @@ if not lspconfig_ok then return end
 mason_lspconfig.setup_handlers {
 	function (server) -- default handler (optional)
 		local opts = {
-			on_attach = require('user.core.lsp.handlers').on_attach,
-			capabilities = require('user.core.lsp.handlers').capabilities
+			on_attach = require('art.core.lsp.handlers').on_attach,
+			capabilities = require('art.core.lsp.handlers').capabilities
 		}
 
-		local has_custom_opts, custom_opts = pcall(require, 'user.core.lsp.settings.' .. server)
+		local has_custom_opts, custom_opts = pcall(require, 'art.core.lsp.settings.' .. server)
 		if has_custom_opts then
 			opts = vim.tbl_deep_extend('force', custom_opts, opts)
 		end

@@ -34,21 +34,19 @@ local kind_icons = {
 	-- find more here: https://www.nerdfonts.com/cheat-sheet
 }
 
-cmp.setup({
+cmp.setup {
 	completion = {
 		completeopt = 'menu,menuone,noinsert',
-		keyword_length = 1
+		keyword_length = 1,
 	},
 
 	experimental = {
 		native_menu = false,
-		ghost_text = true
+		ghost_text = true,
 	},
 
 	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
+		expand = function(args) luasnip.lsp_expand(args.body) end,
 	},
 
 	formatting = {
@@ -58,9 +56,9 @@ cmp.setup({
 			vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
 			vim_item.menu = ({
 				nvim_lsp = '[LSP]',
+				nvim_lua = '[Lua]',
 				buffer = '[Buffer]',
 				luasnip = '[Snip]',
-				nvim_lua = '[Lua]',
 				treesitter = '[Treesitter]',
 			})[entry.source.name]
 			return vim_item
@@ -72,7 +70,7 @@ cmp.setup({
 		if vim.api.nvim_get_mode().mode == 'c' then
 			return true
 		else
-			return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+			return not context.in_treesitter_capture 'comment' and not context.in_syntax_group 'Comment'
 		end
 	end,
 
@@ -88,27 +86,30 @@ cmp.setup({
 		['<C-B>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
 		['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-		['<C-f>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 'i', 'c' }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		['<C-f>'] = cmp.mapping(cmp.mapping.confirm { select = true }, { 'i', 'c' }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	},
 
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
-		{ name = 'treesitter' },
-		{ name = 'buffer' },
-		{ name = 'luasnip' },
+		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'nvim_lua' },
+		{ name = 'luasnip' },
+		{ name = 'buffer' },
+		{ name = 'treesitter' },
 		{ name = 'path' },
-		{ name = 'spell' },
 		{ name = 'emoji' },
+		{ name = 'spell' },
 		{ name = 'calc' },
+		{ name = 'plugins' },
 	}, {
 		{ name = 'buffer' },
-	})
-})
+	}),
+}
 
 cmp.setup.cmdline('/', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
+		{ name = 'nvim-lsp-document-symbol' },
 		{ name = 'buffer' },
 	},
 })
@@ -123,7 +124,5 @@ cmp.setup.cmdline(':', {
 })
 
 local autopairs_status_ok, autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
-if not autopairs_status_ok then
-	return
-end
+if not autopairs_status_ok then return end
 cmp.event:on('confirm_done', autopairs.on_confirm_done())

@@ -1,6 +1,15 @@
 local o = vim.opt
 vim.g.mapleader = ' '
 
+-- HACK: Worth doing a table to then iterate over?
+--  In favor:
+--		Is in a table?
+--		Looks cooler?
+--	Dark side:
+--		Memory for the table?
+--		Extra ms expended in iterating?
+--		More lines of code?
+
 --> Left side visual
 o.number = true
 o.relativenumber = false
@@ -36,10 +45,15 @@ o.incsearch = true
 o.mousemoveevent = true
 
 --> Others
-o.timeoutlen = 300
+o.timeoutlen = 200
 o.scrolloff = 8
-o.isfname:append('@-@')
+o.sidescrolloff = 8
+o.isfname:append '@-@'
 o.updatetime = 50
+o.hidden = true
+o.showmode = false
+o.title = true
+o.cursorline = true
 
 --> Swap
 o.swapfile = false

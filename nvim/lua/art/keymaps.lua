@@ -1,10 +1,8 @@
 -- Functional wrapper for mapping custom keybindings
 local function map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        options = vim.tbl_extend('force', options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+	local options = { noremap = true, silent = true }
+	if opts then options = vim.tbl_extend('force', options, opts) end
+	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 --> Edit Neovim config
@@ -28,12 +26,12 @@ map('i', '<C-;>', '<End>;<CR>')
 map('i', '<C-CR>', '<Esc>o')
 
 --> Next argument
-map('i', '<C-\'>', '<Esc>f\'a, \'\'<Left>')
-map('i', '<C-{>', '<Esc>f\'a, {}<Left>')
+map('i', "<C-'>", "<Esc>f'a, ''<Left>")
+map('i', '<C-{>', "<Esc>f'a, {}<Left>")
 
 --> Visual move
-map('v', 'J', ':m \'>+1<CR>gv=gv')
-map('v', 'K', ':m \'<-2<CR>gv=gv')
+map('v', 'J', ":m '>+1<CR>gv=gv")
+map('v', 'K', ":m '<-2<CR>gv=gv")
 
 --> Keep cursor centered in screen
 map('n', 'J', 'mzJ`z')

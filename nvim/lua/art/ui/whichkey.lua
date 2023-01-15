@@ -1,14 +1,12 @@
 local status_ok, whichkey = pcall(require, 'which-key')
-if not status_ok then
-	return
-end
+if not status_ok then return end
 
 local config = {
 	plugins = {
 		presets = {
 			operators = true,
 			motions = true,
-		}
+		},
 	},
 	ignore_missing = false,
 }
@@ -28,20 +26,20 @@ local mappings = {
 	q = { '<cmd>q!<CR>', 'Quit' },
 	r = { '<cmd>runtime! lua/user/**/*.lua after/**/*.lua<CR>', 'reload' },
 	c = { '<cmd>bdelete!<CR>', 'Close Buffer' },
-  h = { '<cmd>nohlsearch<CR>', 'No Highlight' },
+	h = { '<cmd>nohlsearch<CR>', 'No Highlight' },
 	b = { '<cmd>ToggleBool<CR>', 'Toggle boolean' },
 
 	p = {
-    name = 'Packer',
-    c = { '<cmd>PackerCompile<CR>', 'Compile' },
-    i = { '<cmd>PackerInstall<CR>', 'Install' },
-    s = { '<cmd>PackerSync<CR>', 'Sync' },
-    S = { '<cmd>PackerStatus<CR>', 'Status' },
-    u = { '<cmd>PackerUpdate<CR>', 'Update' },
-  },
+		name = 'Packer',
+		c = { '<cmd>PackerCompile<CR>', 'Compile' },
+		i = { '<cmd>PackerInstall<CR>', 'Install' },
+		s = { '<cmd>PackerSync<CR>', 'Sync' },
+		S = { '<cmd>PackerStatus<CR>', 'Status' },
+		u = { '<cmd>PackerUpdate<CR>', 'Update' },
+	},
 
 	s = {
-		name = "Search",
+		name = 'Search',
 		b = { '<cmd>Telescope git_branches<CR>', 'Checkout branch' },
 		c = { '<cmd>Telescope colorscheme<CR>', 'Colorscheme' },
 		C = { '<cmd>Telescope commands<CR>', 'Commands' },
@@ -52,7 +50,7 @@ local mappings = {
 		M = { '<cmd>Telescope man_pages<CR>', 'Man Pages' },
 		p = {
 			'<cmd>lua require("telescope.builtin").colorscheme({ enable_preview = true })<CR>',
-			'Colorscheme Preview'
+			'Colorscheme Preview',
 		},
 		r = { '<cmd>Telescope oldfiles<CR>', 'Recent Files' },
 		R = { '<cmd>Telescope registers<CR>', 'Registers' },
@@ -64,6 +62,32 @@ local mappings = {
 		n = { '<cmd>lua require("todo-comments").jump_next()<CR>', 'Next todo comment' },
 		p = { '<cmd>lua require("todo-comments).jump_previous()<CR>', 'Previous todo comment' },
 		s = { '<cmd>TodoTrouble<CR>', 'search' },
+	},
+	g = {
+		name = 'Git',
+		g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", 'Lazygit' },
+		j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", 'Next Hunk' },
+		k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", 'Prev Hunk' },
+		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", 'Blame' },
+		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", 'Preview Hunk' },
+		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", 'Reset Hunk' },
+		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", 'Reset Buffer' },
+		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", 'Stage Hunk' },
+		u = {
+			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+			'Undo Stage Hunk',
+		},
+		o = { '<cmd>Telescope git_status<cr>', 'Open changed file' },
+		b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
+		c = { '<cmd>Telescope git_commits<cr>', 'Checkout commit' },
+		C = {
+			'<cmd>Telescope git_bcommits<cr>',
+			'Checkout commit(for current file)',
+		},
+		d = {
+			'<cmd>Gitsigns diffthis HEAD<cr>',
+			'Git Diff',
+		},
 	},
 
 	l = {

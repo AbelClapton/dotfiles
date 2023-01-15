@@ -1,14 +1,15 @@
 local status_ok, gitsigns = pcall(require, 'gitsigns')
 if not status_ok then return end
 
+local icons = require 'art.ui.icons'.git
+
 gitsigns.setup {
   signs = {
-    add          = { text = '│' },
-    change       = { text = '│' },
-    delete       = { text = '_' },
-    topdelete    = { text = '‾' },
-    changedelete = { text = '~' },
-    untracked    = { text = '┆' },
+    add          = { text = icons.BoldLineLeft },
+    change       = { text = icons.BoldLineLeft },
+    delete       = { text = icons.Triangle },
+    topdelete    = { text = icons.Triangle },
+    changedelete = { text = icons.BoldLineLeft },
   },
 
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`

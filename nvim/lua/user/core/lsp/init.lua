@@ -1,5 +1,0 @@
-require 'user.core.lsp.setup'
-require 'user.core.lsp.mason'
-require 'user.core.lsp.mason-lspconfig'
-require 'user.core.lsp.fidget'
-require 'user.core.lsp.mason-null-ls'

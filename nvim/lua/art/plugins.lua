@@ -1,8 +1,8 @@
 local ensure_packer = function()
 	local fn = vim.fn
-	local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+	local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+		fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
 		vim.cmd [[packadd packer.nvim]]
 		return true
 	end
@@ -12,28 +12,26 @@ end
 local packer_bootstrap = ensure_packer()
 
 --> Autoload packer on plugins.lua write
-vim.cmd([[
+vim.cmd [[
 	augroup packer_user_config
 		autocmd!
 		autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 	augroup end
-]])
+]]
 
 --> Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, 'packer')
 if not status_ok then return end
 
 --> Have packer use a popup window
-packer.init({
+packer.init {
 	display = {
-		open_fn = function()
-			return require('packer.util').float({ border = 'rounded' })
-		end,
+		open_fn = function() return require('packer.util').float { border = 'rounded' } end,
 	},
 	git = {
 		clone_timeout = 1000,
-	}
-})
+	},
+}
 
 return packer.startup(function(use)
 	use 'wbthomason/packer.nvim'
@@ -42,6 +40,7 @@ return packer.startup(function(use)
 	use { 'kyazdani42/nvim-web-devicons' }
 	use { 'nvim-lua/plenary.nvim' }
 	use { 'stevearc/dressing.nvim' }
+	use { 'SmiteshP/nvim-gps' }
 
 	--> UI
 	--> Colorscheme
@@ -59,8 +58,11 @@ return packer.startup(function(use)
 	--> Bufferline
 	use { 'akinsho/bufferline.nvim', tag = 'v3.*', requires = 'kyazdani42/nvim-web-devicons' }
 
+	--> Winbar
+	use { 'SmiteshP/nvim-navic' }
+
 	--> Syntax Highlighting
-	use { 'nvim-treesitter/nvim-treesitter',  run = ':TSUpdate' }
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use { 'RRethy/vim-illuminate' }
 
 	--> Core
@@ -73,20 +75,26 @@ return packer.startup(function(use)
 
 	--> Autocompletion
 	use { 'hrsh7th/nvim-cmp' }
-	use { 'hrsh7th/cmp-buffer' }
-	use { 'hrsh7th/cmp-path' }
 	use { 'hrsh7th/cmp-nvim-lua' }
 	use { 'hrsh7th/cmp-nvim-lsp' }
+	use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
+	use { 'hrsh7th/cmp-nvim-lsp-document-symbol' }
 	use { 'hrsh7th/cmp-cmdline' }
+	use { 'hrsh7th/cmp-buffer' }
+	use { 'hrsh7th/cmp-path' }
 	use { 'hrsh7th/cmp-calc' }
 	use { 'hrsh7th/cmp-emoji' }
 	use { 'ray-x/cmp-treesitter' }
 	use { 'f3fora/cmp-spell' }
+	use {
+		'KadoBOT/cmp-plugins',
+		config = function() require('cmp-plugins').setup { files = { 'plugins.lua' } } end
+	}
 
 	--> Snippets
-  use { 'L3MON4D3/LuaSnip', wants = 'rafamadriz/friendly-snippets' }
+	use { 'L3MON4D3/LuaSnip', wants = 'rafamadriz/friendly-snippets' }
 	use { 'rafamadriz/friendly-snippets' }
-  use { 'saadparwaiz1/cmp_luasnip' }
+	use { 'saadparwaiz1/cmp_luasnip' }
 
 	--> LSP
 	use { 'williamboman/mason.nvim' }
@@ -105,6 +113,9 @@ return packer.startup(function(use)
 	use { 'ahmedkhalf/project.nvim' }
 
 	--> Utils
+	--> Nofity
+	use { 'rcarriga/nvim-notify' }
+
 	--> Toggle Bool
 	use { 'gerazov/vim-toggle-bool', requires = 'AndrewRadev/switch.vim' }
 
@@ -123,7 +134,5 @@ return packer.startup(function(use)
 
 	--> Automatically set up your configuration after cloning packer.nvim
 	--> Put this at the end after all plugins
-	if packer_bootstrap then
-		require('packer').sync()
-	end
+	if packer_bootstrap then require('packer').sync() end
 end)
