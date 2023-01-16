@@ -1,5 +1,0 @@
-require 'art.core.lsp.ui'
-require 'art.core.lsp.mason'
-require 'art.core.lsp.mason-lspconfig'
-require 'art.core.lsp.fidget'
-require 'art.core.lsp.mason-null-ls'

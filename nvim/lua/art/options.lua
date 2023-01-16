@@ -1,5 +1,6 @@
 local o = vim.opt
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- HACK: Worth doing a table to then iterate over?
 --  In favor:
