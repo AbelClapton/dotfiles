@@ -15,7 +15,7 @@ return {
 	},
 	experimental = {
 		native_menu = false,
-		ghost_text = true
+		ghost_text = true,
 	},
 	enabled = function()
 		if vim.api.nvim_get_mode().mode ~= 'c' then return end
@@ -29,7 +29,7 @@ return {
 			item.kind = string.format('%s', icons[item.kind])
 			item.menu = menu[entry.source.name]
 			return item
-		end
+		end,
 	},
 	mapping = {
 		['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
@@ -37,8 +37,9 @@ return {
 		['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
 		['<C-B>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 		['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+		['.'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
 		['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-		['<C-f>'] = cmp.mapping(cmp.mapping.confirm { select = true }, { 'i', 'c' })
+		['<C-f>'] = cmp.mapping(cmp.mapping.confirm { select = true }, { 'i', 'c' }),
 	},
 	snippet = {
 		expand = function(args) require('luasnip').lsp_expand(args.body) end,
@@ -59,6 +60,6 @@ return {
 		{ name = 'buffer' },
 	}),
 	window = {
-		documentation = cmp.config.window.bordered()
-	}
+		documentation = cmp.config.window.bordered(),
+	},
 }

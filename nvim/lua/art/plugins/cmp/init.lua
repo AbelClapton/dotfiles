@@ -5,7 +5,6 @@ return {
 
 		cmp.setup { -- default
 			completion = {
-				autocomplete = true,
 				completeopt = 'menu,menuone,noselect',
 				keyword_length = 1,
 			},
@@ -46,7 +45,7 @@ return {
 				documentation = cmp.config.window.bordered(),
 			},
 			sources = cmp.config.sources({
-				{ name = 'nvim_lsp' },
+				{ name = 'nvim_lsp', trigger_characters = { '.' } },
 				{ name = 'nvim_lua' },
 				{ name = 'luasnip' },
 				{ name = 'path' },

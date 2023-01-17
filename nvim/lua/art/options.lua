@@ -19,11 +19,11 @@ o.signcolumn = 'yes'
 o.fillchars = { eob = ' ', fold = ' ' } --> remove end of buffer '~' chars
 
 --> Indentation
-o.tabstop = 2 -- of columns of whitespaces a \t is worth
-o.shiftwidth = 2 -- columns of whitespace a 'level of indentation' is worth
-o.softtabstop = 2 -- columns of whitespace is a tab or a backspace keypress worth
-o.expandtab = false -- tabs keypresses will be expanded into spaces
-o.list = true -- print indentation characters
+o.tabstop = 2
+o.shiftwidth = 2
+o.softtabstop = 2
+o.expandtab = false
+o.list = true
 o.listchars = 'trail:·,tab:  '
 o.autoindent = true
 o.smartindent = true
@@ -34,10 +34,12 @@ o.splitbelow = true
 o.splitright = true
 
 --> Folding
+o.foldlevel = 5
 o.foldmethod = 'expr'
 o.foldexpr = 'nvim_treesitter#foldexpr()'
 
 --> Colors
+o.guifont = 'monospace:h17'
 o.termguicolors = true
 o.hlsearch = true
 o.incsearch = true
@@ -45,16 +47,19 @@ o.incsearch = true
 --> Mouse
 o.mousemoveevent = true
 
---> Others
-o.timeoutlen = 200
+--> Editor
 o.scrolloff = 8
 o.sidescrolloff = 8
+o.title = true
+o.cursorline = true
+o.cmdheight = 1
+
+--> Others
+o.timeoutlen = 200
 o.isfname:append '@-@'
 o.updatetime = 50
 o.hidden = true
 o.showmode = false
-o.title = true
-o.cursorline = true
 
 --> Swap
 o.swapfile = false

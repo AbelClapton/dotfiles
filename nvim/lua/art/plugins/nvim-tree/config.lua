@@ -1,14 +1,28 @@
 local icons = require 'art.ui.icons'
+local f = require 'art.plugins.nvim-tree.functions'
 
 return {
-	hijack_directories = {
-		enable = true,
+	actions = {
+		change_dir = {
+			enable = true,
+			global = false,
+			restrict_above_cwd = false,
+		},
+		open_file = {
+			quit_on_open = false,
+			resize_window = false,
+			window_picker = {
+				enable = true,
+				buftype = { 'nofile', 'terminal', 'help' },
+				filetype = { 'notify', 'packer', 'qf', 'diff', 'fugitive', 'fugitiveblame' },
+			},
+		},
+		use_system_clipboard = true,
 	},
-	live_filter = {
-		prefix = '[FILTER]: ',
-		always_show_folders = false, -- Turn into false from true by default
-	},
+	auto_reload_on_write = false,
 	diagnostics = {
+		enable = true,
+		show_on_dirs = true,
 		icons = {
 			hint = icons.diagnostics.BoldHint,
 			info = icons.diagnostics.BoldInformation,
@@ -16,27 +30,22 @@ return {
 			error = icons.diagnostics.BoldError,
 		},
 	},
-	view = {
-		width = 30,
-		hide_root_folder = false,
-		side = 'left',
-		number = false,
-		relativenumber = false,
-		signcolumn = 'yes',
-		mappings = {
-			custom_only = false,
-			list = {
-				{ key = 'l', action = 'edit', action_cb = edit_or_open },
-				{
-					key = 'L',
-					action = 'vsplit_preview',
-					action_cb = vsplit_preview,
-				},
-				{ key = 'h', action = 'close_node' },
-				{ key = 'H', action = 'collapse_all', action_cb = collapse_all },
-				{ key = 'ga', action = 'git_add', action_cb = git_add },
-			},
-		},
+	filters = {
+		dotfiles = false,
+		custom = { 'node_modules', '\\.cache' },
+		exclude = {},
+	},
+	git = {
+		enable = true,
+		ignore = false,
+		timeout = 200,
+	},
+	hijack_directories = {
+		enable = true,
+	},
+	live_filter = {
+		prefix = '[FILTER]: ',
+		always_show_folders = false, -- Turn into false from true by default
 	},
 	renderer = {
 		icons = {
@@ -44,7 +53,7 @@ return {
 				git = false,
 				folder = true,
 				file = true,
-				folder_arrow = false,
+				folder_arrow = true,
 			},
 			glyphs = {
 				default = icons.ui.Text,
@@ -71,20 +80,42 @@ return {
 		group_empty = false,
 		root_folder_modifier = ':t',
 	},
-	actions = {
-		open_file = {
-			quit_on_open = false,
-		},
-	},
+	respect_buf_cwd = true,
 	sync_root_with_cwd = true,
-	respect_buf_cwd,
+	system_open = {
+		cmd = nil,
+		args = {},
+	},
+	trash = {
+		cmd = 'trash',
+	},
+	update_cwd = true,
 	update_focused_file = {
 		enable = true,
-		update_root = true,
+		update_cwd = true,
+		-- update_root = true,
 	},
-	filters = {
-		dotfiles = false,
-		custom = { 'node_modules', '\\.cache' },
-		exclude = {},
+	view = {
+		width = 30,
+		hide_root_folder = false,
+		side = 'left',
+		number = false,
+		relativenumber = false,
+		signcolumn = 'yes',
+		preserve_window_proportions = true,
+		mappings = {
+			custom_only = false,
+			list = {
+				{ key = 'l', action = 'edit', action_cb = f.edit_or_open },
+				{
+					key = 'L',
+					action = 'vsplit_preview',
+					action_cb = f.vsplit_preview,
+				},
+				{ key = 'h', action = 'close_node' },
+				{ key = 'H', action = 'collapse_all', action_cb = f.collapse_all },
+				{ key = 'ga', action = 'git_add', action_cb = f.git_add },
+			},
+		},
 	},
 }

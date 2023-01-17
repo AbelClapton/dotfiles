@@ -1,9 +1,21 @@
 local M = {}
--- local function get_capabilities()
--- 	local capabilities = vim.lsp.protocol.make_client_capabilities()
--- 	capabilities.textDocument.completion.completionItem.snippetSupport = true
--- 	return require('cmp_nvim_lsp').default_capabilities(capabilities)
--- end
+
+local function get_capabilities()
+	local status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+	if status_ok then return cmp_nvim_lsp.default_capabilities() end
+
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities.textDocument.completion.completionItem.snippetSupport = true
+	capabilities.textDocument.completion.completionItem.resolveSupport = {
+		properties = {
+			'documentation',
+			'detail',
+			'addiotionalTextEdits'
+		}
+	}
+	return capabilities
+end
+
 local function setup_formatting(client, bufnr)
 	if client.supports_method 'textDocument/formatting' then
 		vim.api.nvim_create_autocmd('BufWritePre', {
@@ -31,14 +43,19 @@ local function register_keymaps(bufnr)
 		},
 	}, { buffer = bufnr })
 end
-M.capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+M.capabilities = get_capabilities()
 M.on_attach = function(client, bufnr)
 	register_keymaps(bufnr)
 	setup_formatting(client, bufnr)
 
-	if client.server_capabilities.documentSymbolProvider then require('nvim-navic').attach(client, bufnr) end
+	local navic_ok, navic = pcall(require, 'nvim-navic')
+	if navic_ok and client.server_capabilities.documentSymbolProvider then
+		navic.attach(client, bufnr)
+	end
 
-	require('illuminate').on_attach(client)
+	local illuminate_ok, illuminate = pcall(require, 'illuminate')
+	if illuminate_ok then illuminate.on_attach(client) end
 end
 
 return M

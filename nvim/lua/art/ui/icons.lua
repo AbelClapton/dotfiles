@@ -73,7 +73,7 @@ return {
 		DebugConsole = '',
 		Calendar = '',
 		Check = '',
-		ChevronRight = '>',
+		ChevronRight = '',
 		ChevronShortDown = '',
 		ChevronShortLeft = '',
 		ChevronShortRight = '',

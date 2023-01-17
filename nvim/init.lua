@@ -1,3 +1,4 @@
+-- TODO: refactor into own file
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system {
@@ -27,6 +28,8 @@ return lazy.setup('art.plugins', {
 })
 
 -- TODO: Create 'plugin' to hide eol comments and show it on hover/key-press? Got time?
--- -- TODO: Enhance folder structure
--- -- TODO: Transform configs files into modules, so is possible to implement lazy loading in packer
--- -- TODO: Migrate the cmp icons into the icons file
+-- Can do this with conceal maybe
+
+-- TODO: Migrate the cmp icons into the icons file
+
+-- TODO: Do some syntax config to make italics skip unicode characters (icons babe 😉)

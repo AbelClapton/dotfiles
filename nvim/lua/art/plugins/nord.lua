@@ -8,8 +8,8 @@ return {
 		vim.g.nord_disable_background = false
 		vim.g.nord_italic = true
 		vim.g.nord_uniform_diff_background = false
-		vim.g.nord_bold = true
+		vim.g.nord_bold = false
 
 		vim.cmd [[ colorscheme nord ]]
-	end
+	end,
 }
