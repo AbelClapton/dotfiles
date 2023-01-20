@@ -42,9 +42,13 @@ local function register_keymaps(bufnr)
 			l = { '<cmd>lua vim.diagnostic.open_float()<CR>', 'Open Diagnostics' },
 		},
 		['<leader>l'] = {
+			name = 'LSP',
+			a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code Actions' },
 			f = { '<cmd>lua vim.lsp.buf.format()<cr>', 'Format Document' },
 			j = { '<cmd>lua vim.diagnostic.goto_next()<cr>', 'Goto next diagnostic' },
 			k = { '<cmd>lua vim.diagnostic.goto_prev()<cr>', 'Goto prev diagnostic' },
+			r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
+			s = { '<cmd>lua vim.lsp.buf.signature_help()<cr>', 'Signature Help' },
 		},
 	}, { buffer = bufnr })
 end
