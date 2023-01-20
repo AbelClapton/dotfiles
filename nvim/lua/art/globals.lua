@@ -6,6 +6,10 @@ f.autocmd(
 	'kitty.conf',
 	function() vim.cmd 'silent !kill -SIGUSR1 $(pgrep kitty)' end
 )
--- f.autocmd('BufWritePost', 'AutoReloadTermux', '~/.tmux.conf', function()
--- 	vim.cmd('silent !tmux source-file ~/.tmux.conf ; tmux display-message "Reloaded Config!')
--- end)
+
+f.autocmd(
+	'BufWritePost',
+	'AutoReloadFish',
+	'config.fish',
+	function() vim.cmd 'silent !source ~/.config/fish/config.fish' end
+)
