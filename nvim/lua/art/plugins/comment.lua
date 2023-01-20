@@ -1,6 +1,6 @@
 return {
 	'numToStr/Comment.nvim',
-	event = 'VeryLazy',
+	event = 'BufEnter',
 	-- keys = { { 'gc', nil, { 'i', 'v', 'V' } } },
 	config = true,
 }

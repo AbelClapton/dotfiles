@@ -10,8 +10,8 @@ local function get_capabilities()
 		properties = {
 			'documentation',
 			'detail',
-			'addiotionalTextEdits'
-		}
+			'additionalTextEdits',
+		},
 	}
 	return capabilities
 end
@@ -41,6 +41,11 @@ local function register_keymaps(bufnr)
 			r = { '<cmd>lua vim.lsp.buf.references()<CR>', 'Goto References' },
 			l = { '<cmd>lua vim.diagnostic.open_float()<CR>', 'Open Diagnostics' },
 		},
+		['<leader>l'] = {
+			f = { '<cmd>lua vim.lsp.buf.format()<cr>', 'Format Document' },
+			j = { '<cmd>lua vim.diagnostic.goto_next()<cr>', 'Goto next diagnostic' },
+			k = { '<cmd>lua vim.diagnostic.goto_prev()<cr>', 'Goto prev diagnostic' },
+		},
 	}, { buffer = bufnr })
 end
 
@@ -50,9 +55,7 @@ M.on_attach = function(client, bufnr)
 	setup_formatting(client, bufnr)
 
 	local navic_ok, navic = pcall(require, 'nvim-navic')
-	if navic_ok and client.server_capabilities.documentSymbolProvider then
-		navic.attach(client, bufnr)
-	end
+	if navic_ok and client.server_capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
 
 	local illuminate_ok, illuminate = pcall(require, 'illuminate')
 	if illuminate_ok then illuminate.on_attach(client) end

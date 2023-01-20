@@ -1,5 +1,6 @@
 return {
 	'jose-elias-alvarez/null-ls.nvim',
+	event = 'BufEnter',
 	config = function()
 		local configs = require 'art.plugins.formatting.configs'
 		require('null-ls').setup(configs.null_ls)

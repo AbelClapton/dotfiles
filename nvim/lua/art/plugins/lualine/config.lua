@@ -15,15 +15,15 @@ return {
 		always_divide_middle = true,
 		globalstatus = true,
 		refresh = {
-			statusline = 100,
-			tabline = 100,
-			winbar = 100,
+			statusline = 500,
+			tabline = 500,
+			winbar = 500,
 		},
 	},
 	sections = {
 		lualine_a = { 'mode' },
 		lualine_b = {
-			{ 'hostname', icon = { '', align = 'left', color = { fg = 'teal' } } },
+			{ 'hostname', icon = { ' ', align = 'left', color = { fg = 'teal' } } },
 			'branch',
 			'diff',
 			'diagnostics',
@@ -56,7 +56,7 @@ return {
 	},
 	winbar = {
 		lualine_a = { 'filename' },
-		lualine_b = { 'location' },
+		lualine_b = {},
 		lualine_c = { { navic.get_location, cond = navic.is_available } },
 		lualine_x = {},
 		lualine_y = { 'diagnostics' },

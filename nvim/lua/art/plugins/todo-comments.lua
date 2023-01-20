@@ -1,6 +1,6 @@
 return {
 	'folke/todo-comments.nvim',
-	event = 'BufEnter',
+	event = 'VeryLazy',
 	config = true,
-	dependencies = 'nvim-lua/plenary.nvim'
+	dependencies = 'nvim-lua/plenary.nvim',
 }

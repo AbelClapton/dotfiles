@@ -1,5 +1,6 @@
 return {
 	'neovim/nvim-lspconfig',
+	event = 'BufReadPre',
 	config = function()
 		local config = require 'art.plugins.lsp.config'
 		require('mason').setup(config.mason)

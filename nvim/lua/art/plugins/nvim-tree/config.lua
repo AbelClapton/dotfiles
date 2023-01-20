@@ -1,6 +1,9 @@
 local icons = require 'art.ui.icons'
 local f = require 'art.plugins.nvim-tree.functions'
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 return {
 	actions = {
 		change_dir = {
@@ -10,11 +13,14 @@ return {
 		},
 		open_file = {
 			quit_on_open = false,
-			resize_window = false,
+			resize_window = true,
 			window_picker = {
 				enable = true,
-				buftype = { 'nofile', 'terminal', 'help' },
-				filetype = { 'notify', 'packer', 'qf', 'diff', 'fugitive', 'fugitiveblame' },
+				picker = 'default',
+				exclude = {
+					buftype = { 'nofile', 'terminal', 'help' },
+					filetype = { 'notify', 'packer', 'qf', 'diff', 'fugitive', 'fugitiveblame' },
+				},
 			},
 		},
 		use_system_clipboard = true,
@@ -33,22 +39,27 @@ return {
 	filters = {
 		dotfiles = false,
 		custom = { 'node_modules', '\\.cache' },
-		exclude = {},
+		exclude = { 'help' },
 	},
 	git = {
 		enable = true,
 		ignore = false,
 		timeout = 200,
 	},
+	hijack_cursor = true,
 	hijack_directories = {
 		enable = true,
 	},
+	ignore_ft_on_setup = { 'alpha', 'help' },
 	live_filter = {
 		prefix = '[FILTER]: ',
 		always_show_folders = false, -- Turn into false from true by default
 	},
 	renderer = {
 		icons = {
+			git_placement = 'before',
+			modified_placement = 'after',
+			padding = ' ',
 			show = {
 				git = false,
 				folder = true,
@@ -68,11 +79,11 @@ return {
 					untracked = icons.git.FileUntracked,
 				},
 				folder = {
-					default = icons.ui.Folder,
-					open = icons.ui.FolderOpen,
-					empty = icons.ui.EmptyFolder,
-					empty_open = icons.ui.EmptyFolderOpen,
-					symlink = icons.ui.FolderSymlink,
+					default = icons.ui.Folder .. ' ',
+					open = icons.ui.FolderOpen .. ' ',
+					empty = icons.ui.EmptyFolder .. ' ',
+					empty_open = icons.ui.EmptyFolderOpen .. ' ',
+					symlink = icons.ui.FolderSymlink .. ' ',
 				},
 			},
 		},
@@ -80,7 +91,8 @@ return {
 		group_empty = false,
 		root_folder_modifier = ':t',
 	},
-	respect_buf_cwd = true,
+	open_on_setup = true,
+	-- respect_buf_cwd = true,
 	sync_root_with_cwd = true,
 	system_open = {
 		cmd = nil,
@@ -89,11 +101,10 @@ return {
 	trash = {
 		cmd = 'trash',
 	},
-	update_cwd = true,
 	update_focused_file = {
 		enable = true,
-		update_cwd = true,
-		-- update_root = true,
+		update_root = true,
+		ignore_list = { 'help' },
 	},
 	view = {
 		width = 30,

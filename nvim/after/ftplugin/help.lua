@@ -1,3 +1,2 @@
-vim.cmd [[ vertical resize 65 ]]
 vim.cmd [[ wincmd L ]]
 vim.keymap.set('n', 'q', '<cmd>bd!<cr>', { buffer = 0 })
